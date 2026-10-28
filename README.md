@@ -27,10 +27,13 @@ Instructions for starting a local development server will be added here.
 
 ```
 hideaway/
-└── README.md    Project overview
+├── README.md        Project overview
+└── jhargram/        Standalone Jhargram page (publish at /jhargram/)
+    ├── index.html   Page markup, styles and scripts (no build step)
+    └── images/      Optimised photos used by the page
 ```
 
-This section will be updated as source directories are added.
+To preview the Jhargram page, open `jhargram/index.html` in a browser. To add a photo to its gallery, put the image in `jhargram/images/` and add another `<button data-full="images/NAME.jpg"><img src="images/NAME.jpg" alt="..."></button>` inside `#gallery-grid`.
 
 ## Contributing
 
