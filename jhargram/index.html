@@ -134,6 +134,11 @@ section{padding:clamp(72px,10vw,140px) 0}
 .room .btn{align-self:flex-start;margin-top:auto}
 
 /* gallery */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:-16px 0 32px}
+.filters button{font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;padding:12px 22px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
+.filters button:hover{border-color:var(--ink)}
+.filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.masonry button[hidden]{display:none}
 .masonry{columns:3;column-gap:20px}
 .masonry button{display:block;width:100%;margin:0 0 20px;padding:0;border:0;border-radius:var(--radius);overflow:hidden;cursor:zoom-in;background:var(--ink);break-inside:avoid}
 .masonry img{width:100%;transition:transform .6s,opacity .3s}
@@ -328,16 +333,37 @@ footer.site a{text-decoration:none;opacity:.75}footer.site a:hover{opacity:1;col
     <div class="sec-head reveal">
       <div>
         <div class="eyebrow"><b>04</b><span>Gallery</span></div>
-        <h2>A look inside</h2>
+        <h2>A look around</h2>
       </div>
       <p>Tap any photo to view it full size.</p>
     </div>
-    <div class="masonry reveal" id="gallery-grid">
-      <button type="button" data-full="images/dining-hall-evening.jpg"><img src="images/dining-hall-evening.jpg" alt="Guests dining in the evening under a ceiling of rattan lamps, with garden views through the windows" width="2000" height="1125" loading="lazy"></button>
-      <button type="button" data-full="images/rattan-lamp-ceiling.jpg"><img src="images/rattan-lamp-ceiling.jpg" alt="Looking up at large rattan pendant lamps" width="1125" height="2000" loading="lazy"></button>
-      <button type="button" data-full="images/brick-wall-rattan-mirrors.jpg"><img src="images/brick-wall-rattan-mirrors.jpg" alt="Brick wall with backlit woven mirrors, tiled dado and cushioned seating" width="2000" height="1125" loading="lazy"></button>
-      <button type="button" data-full="images/dining-hall-windows.jpg"><img src="images/dining-hall-windows.jpg" alt="Row of tables beside tall windows and painted pillars" width="1125" height="2000" loading="lazy"></button>
-      <button type="button" data-full="images/tile-floor-table-topview.jpg"><img src="images/tile-floor-table-topview.jpg" alt="Table set with placemats and cutlery, seen from above, on patterned tile" width="1125" height="2000" loading="lazy"></button>
+    <div class="filters reveal" role="group" aria-label="Filter photos">
+      <button type="button" class="on" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="dining" aria-pressed="false">Dining</button>
+      <button type="button" data-filter="grounds" aria-pressed="false">Grounds</button>
+      <button type="button" data-filter="drinks" aria-pressed="false">Drinks</button>
+    </div>
+    <div class="masonry" id="gallery-grid">
+      <button type="button" data-cat="dining" data-full="images/dining-hall-evening.jpg"><img src="images/thumbs/dining-hall-evening.jpg" alt="Guests dining in the evening under a ceiling of rattan lamps, with garden views through the windows" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/dining-hall-garden-view.jpg"><img src="images/thumbs/dining-hall-garden-view.jpg" alt="Wide view of the dining hall with rattan lamps overhead, a terracotta pot wall and courtyard windows" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/brick-wall-rattan-mirrors.jpg"><img src="images/thumbs/brick-wall-rattan-mirrors.jpg" alt="Brick wall with backlit woven mirrors, tiled dado and cushioned seating" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="grounds" data-full="images/pond-garden-view.jpg"><img src="images/thumbs/pond-garden-view.jpg" alt="Still pond with a green lawn and trees beyond" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/dining-hall-lamps-courtyard.jpg"><img src="images/thumbs/dining-hall-lamps-courtyard.jpg" alt="Rows of cane-back chairs and wooden tables under hanging rattan lamps, with the courtyard outside the windows" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="drinks" data-full="images/drink-wine-glass-cherry.jpg"><img src="images/thumbs/drink-wine-glass-cherry.jpg" alt="Red cocktail in a stemmed glass garnished with a cherry, against a brick wall" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/jaali-bar-tile-inlay.jpg"><img src="images/thumbs/jaali-bar-tile-inlay.jpg" alt="Terracotta jaali bar front glowing warm, with patterned tiles inlaid in the stone floor" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/terracotta-pot-wall-buffet.jpg"><img src="images/thumbs/terracotta-pot-wall-buffet.jpg" alt="Buffet counter below a brick wall hung with painted terracotta pots" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="grounds" data-full="images/building-exterior.jpg"><img src="images/thumbs/building-exterior.jpg" alt="Two-storey building with colonnaded balconies framed by palm trees" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/rattan-lamp-ceiling.jpg"><img src="images/thumbs/rattan-lamp-ceiling.jpg" alt="Looking up at large rattan pendant lamps" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/dining-hall-bar-wide.jpg"><img src="images/thumbs/dining-hall-bar-wide.jpg" alt="Dining hall with the backlit jaali-fronted bar and woven mirrors on the brick wall" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="grounds" data-full="images/sunset-sky.jpg"><img src="images/thumbs/sunset-sky.jpg" alt="Orange and gold sunset over dark clouds and treetops" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/dining-hall-windows.jpg"><img src="images/thumbs/dining-hall-windows.jpg" alt="Row of tables beside tall windows and painted pillars" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="drinks" data-full="images/drink-tall-glass.jpg"><img src="images/thumbs/drink-tall-glass.jpg" alt="Tall glass of a deep red drink with a lemon wheel on the rim" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/dining-hall-lamps-tiles.jpg"><img src="images/thumbs/dining-hall-lamps-tiles.jpg" alt="Tables and chairs on a stone floor with tile inlays, beneath a cluster of rattan lamps" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/dining-hall-guests-bar.jpg"><img src="images/thumbs/dining-hall-guests-bar.jpg" alt="Guests at tables beside the lit bar counter, under woven pendant lamps" width="900" height="507" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/tile-floor-table-topview.jpg"><img src="images/thumbs/tile-floor-table-topview.jpg" alt="Table set with placemats and cutlery, seen from above, on patterned tile" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/dining-hall-ceiling-angle.jpg"><img src="images/thumbs/dining-hall-ceiling-angle.jpg" alt="Dining hall seen from a low angle, with a steel-grid ceiling and woven pendant lamps" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="drinks" data-full="images/drink-champagne-flute.jpg"><img src="images/thumbs/drink-champagne-flute.jpg" alt="Golden sparkling drink in a champagne flute against a brick wall" width="506" height="900" loading="lazy"></button>
+      <button type="button" data-cat="dining" data-full="images/dining-hall-lunch.jpg"><img src="images/thumbs/dining-hall-lunch.jpg" alt="Guests dining in the hall beneath rattan lamps, with large windows to the garden" width="900" height="507" loading="lazy"></button>
     </div>
   </div>
 </section>
@@ -398,11 +424,17 @@ footer.site a{text-decoration:none;opacity:.75}footer.site a:hover{opacity:1;col
     els.forEach(function(el){io.observe(el)});
   }else{els.forEach(function(el){el.classList.add('in')})}
 
-  var items=[].slice.call(document.querySelectorAll('#gallery-grid button')),lb=document.getElementById('lb'),img=document.getElementById('lb-img'),i=0,last;
+  var all=[].slice.call(document.querySelectorAll('#gallery-grid button')),items=all.slice(),lb=document.getElementById('lb'),img=document.getElementById('lb-img'),i=0,last;
   function show(n){i=(n+items.length)%items.length;var b=items[i];img.src=b.dataset.full;img.alt=b.querySelector('img').alt}
   function open(n){last=document.activeElement;show(n);lb.classList.add('open');document.body.style.overflow='hidden';lb.querySelector('.lb-close').focus()}
   function close(){lb.classList.remove('open');document.body.style.overflow='';if(last)last.focus()}
-  items.forEach(function(b,n){b.addEventListener('click',function(){open(n)})});
+  all.forEach(function(b){b.addEventListener('click',function(){open(items.indexOf(b))})});
+  var fb=[].slice.call(document.querySelectorAll('.filters button'));
+  fb.forEach(function(f){f.addEventListener('click',function(){
+    fb.forEach(function(x){var on=x===f;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+    all.forEach(function(b){b.hidden=f.dataset.filter!=='all'&&b.dataset.cat!==f.dataset.filter});
+    items=all.filter(function(b){return !b.hidden});
+  })});
   lb.querySelector('.lb-close').onclick=close;
   lb.querySelector('.lb-prev').onclick=function(){show(i-1)};
   lb.querySelector('.lb-next').onclick=function(){show(i+1)};
