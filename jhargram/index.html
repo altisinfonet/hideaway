@@ -157,16 +157,11 @@ section{padding:clamp(72px,10vw,140px) 0}
 
 
 /* rooms */
-.rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.room{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 14px 40px rgba(21,61,75,.08);display:flex;flex-direction:column}
-.room .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,#5b3d20,#153d4b)}
-.room .ph::after{content:attr(data-label);position:absolute;inset:0;display:grid;place-items:center;font:400 28px/1 var(--serif);color:rgba(255,255,255,.7)}
-.room .ph img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;transition:transform .8s}
-.room:hover .ph img{transform:scale(1.05)}
-.room .body{padding:24px 26px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
-.room h3{font-size:30px}
-.room p{margin:0;color:var(--ink-soft);font-size:16px;line-height:1.55}
-.room .btn{align-self:flex-start;margin-top:auto}
+.types{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.type{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:28px 32px;background:#fff;border-radius:var(--radius);box-shadow:0 14px 40px rgba(21,61,75,.08)}
+.type h3{font-size:clamp(28px,3vw,44px)}
+.type .btn{white-space:nowrap;flex:none}
+.masonry.mix{columns:4}
 
 
 /* amenities + location */
@@ -239,14 +234,13 @@ nav.main a.active{opacity:1;color:var(--accent)}
 /* reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.hero-video{display:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.card img,.masonry img,.room .ph img{transition:none}.video button::before{transition:none}.totop{transition:none}}
+@media (prefers-reduced-motion:reduce){.hero-video{display:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.card img,.masonry img{transition:none}.video button::before{transition:none}.totop{transition:none}}
 
 /* type scale shared with the main site */
 .intro h2,.sec-head h2,.visit h2{font-size:clamp(40px,5.14vw,74px);line-height:1.05;letter-spacing:-1px}
-.intro p,.sec-head p,.visit p,.loc address,.aerial p,.room p{color:var(--ink-soft)}
+.intro p,.sec-head p,.visit p,.loc address,.aerial p{color:var(--ink-soft)}
 .card h3{font-size:32px;line-height:1.2;letter-spacing:-1px}.card p{font-size:16px}
 .amen .card h3{font-size:32px}
-.room h3{font-size:24px;letter-spacing:-1px}
 .loc h3,.info h3{font-size:24px;line-height:1.2}
 .aerial h3{font-size:clamp(32px,3.6vw,48px)}
 
@@ -268,18 +262,23 @@ nav.main a.active{opacity:1;color:var(--accent)}
   .hero .wrap{padding-top:170px}
   .fgrid{grid-template-columns:1fr}
   .hl-grid{grid-template-columns:repeat(3,1fr)}
-  .cards,.rooms-grid,.amen-grid{grid-template-columns:1fr 1fr}
-  .masonry{columns:2}
+  .cards,.amen-grid{grid-template-columns:1fr 1fr}
+  .masonry,.masonry.mix{columns:2}
 }
 @media (max-width:760px){
   .intro,.sec-head,.visit .grid{grid-template-columns:1fr}
   .intro figure{order:-1}
   .hl-grid{grid-template-columns:repeat(2,1fr)}
-  .cards,.rooms-grid,.amen-grid{grid-template-columns:1fr}
+  .cards,.amen-grid{grid-template-columns:1fr}
   .loc{grid-template-columns:1fr}
   .card{aspect-ratio:4/5}
   .fcols{grid-template-columns:1fr}
   .masonry{columns:1}
+  .masonry.mix{columns:2;column-gap:12px}
+  .masonry.mix button{margin-bottom:12px}
+  .types{grid-template-columns:1fr}
+  .type{padding:20px 20px}
+  .type .btn{padding:13px 22px}
   .info{grid-template-columns:1fr}
   .eyebrow{gap:40px}
   .intro h2,.sec-head h2,.visit h2{line-height:1.3}
@@ -388,36 +387,30 @@ nav.main a.active{opacity:1;color:var(--accent)}
         <div class="eyebrow"><b>03</b><span>Rooms</span></div>
         <h2>Rest where the day slows down</h2>
       </div>
-      <p>Exposed brick, warm teak and wide windows onto the greenery. Ask our team about availability and the best direct rate.</p>
+      <p>Choose from Deluxe and Super Deluxe rooms, with exposed brick, warm wood and wide windows onto the greenery. Ask our team about availability and the best direct rate.</p>
     </div>
-    <div class="rooms-grid">
-<!-- TODO: confirm the real room-type names, sizes and what each includes. Titles below describe the photos only. -->
-      <article class="room reveal">
-        <div class="ph" data-label="Brick &amp; Teak Room"><img src="images/rooms/room-teak-19.webp" alt="Guest room with exposed brick walls, teak flooring and a double bed beside a balcony door" width="1600" height="1200" loading="lazy" onerror="this.remove()"></div>
-        <div class="body">
-          <h3>Brick &amp; Teak Room</h3>
-          <p>Exposed brick walls, teak plank flooring, air conditioning and a window onto the greenery.</p>
-          <a class="btn" href="mailto:sales@stayhideaway.in?subject=Hideaway%20Dulungbari%20-%20Brick%20and%20Teak%20Room">Enquire &rsaquo;</a>
-        </div>
+    <div class="types">
+      <article class="type reveal">
+        <h3>Deluxe</h3>
+        <a class="btn" href="mailto:sales@stayhideaway.in?subject=Hideaway%20Dulungbari%20-%20Deluxe%20room">Enquire &rsaquo;</a>
       </article>
-      <article class="room reveal">
-        <div class="ph" data-label="Brick Room with Tiled Floor"><img src="images/rooms/room-tile-04.webp" alt="Guest room with exposed brick walls, a light tiled floor, ceiling fan and a double bed" width="1600" height="1200" loading="lazy" onerror="this.remove()"></div>
-        <div class="body">
-          <h3>Brick Room with Tiled Floor</h3>
-          <p>Brick walls, a light tiled floor, ceiling fan, air conditioning and a wall-mounted TV.</p>
-          <a class="btn" href="mailto:sales@stayhideaway.in?subject=Hideaway%20Dulungbari%20-%20Brick%20Room%20with%20Tiled%20Floor">Enquire &rsaquo;</a>
-        </div>
-      </article>
-      <article class="room reveal">
-        <div class="ph" data-label="Balcony with Tribal Art"><img src="images/balconies/balcony-14.webp" alt="Balcony with a hand-painted elephant mural, a cane chair and teak flooring" width="1600" height="1200" loading="lazy" onerror="this.remove()"></div>
-        <div class="body">
-          <h3>Balcony with Tribal Art</h3>
-          <p>A private balcony with a hand-painted elephant mural and cane seating, looking over the gardens.</p>
-          <a class="btn" href="mailto:sales@stayhideaway.in?subject=Hideaway%20Dulungbari%20-%20Balcony%20with%20Tribal%20Art">Enquire &rsaquo;</a>
-        </div>
+      <article class="type reveal">
+        <h3>Super Deluxe</h3>
+        <a class="btn" href="mailto:sales@stayhideaway.in?subject=Hideaway%20Dulungbari%20-%20Super%20Deluxe%20room">Enquire &rsaquo;</a>
       </article>
     </div>
-    <div class="more reveal" style="margin-top:36px"><a class="btn" href="#gallery" data-gallery="rooms">See all room photos &rsaquo;</a></div>
+<!-- TODO: add size / bed / inclusions per room type once confirmed. Photos below are a mix and are not assigned to a type. -->
+    <div class="masonry mix reveal">
+      <button type="button" data-open="images/rooms/room-teak-19.webp"><img src="images/rooms/thumbs/room-teak-19.webp" alt="Guest room with exposed brick walls, teak flooring and a double bed beside a balcony door" width="700" height="525" loading="lazy"></button>
+      <button type="button" data-open="images/rooms/room-tile-04.webp"><img src="images/rooms/thumbs/room-tile-04.webp" alt="Guest room with exposed brick walls, a light tiled floor, ceiling fan and a double bed" width="700" height="394" loading="lazy"></button>
+      <button type="button" data-open="images/balconies/balcony-14.webp"><img src="images/balconies/thumbs/balcony-14.webp" alt="Balcony with a hand-painted elephant mural, a cane chair and teak flooring" width="394" height="700" loading="lazy"></button>
+      <button type="button" data-open="images/rooms/bath-05.webp"><img src="images/rooms/thumbs/bath-05.webp" alt="Bathroom with grey tiles, a round backlit mirror and a vessel basin" width="394" height="700" loading="lazy"></button>
+      <button type="button" data-open="images/rooms/room-teak-12.webp"><img src="images/rooms/thumbs/room-teak-12.webp" alt="Compact guest room with a brick wall, knit throw and framed leaf prints" width="395" height="700" loading="lazy"></button>
+      <button type="button" data-open="images/rooms/room-tile-01.webp"><img src="images/rooms/thumbs/room-tile-01.webp" alt="Guest room with an exposed brick wall, double bed and TV" width="700" height="394" loading="lazy"></button>
+      <button type="button" data-open="images/rooms/room-detail-22.webp"><img src="images/rooms/thumbs/room-detail-22.webp" alt="Room cabinet with a kettle and mini-fridge on a teak floor" width="525" height="700" loading="lazy"></button>
+      <button type="button" data-open="images/balconies/balcony-11.webp"><img src="images/balconies/thumbs/balcony-11.webp" alt="Balcony with a painted elephant mural against a brick wall" width="394" height="700" loading="lazy"></button>
+    </div>
+    <div class="more reveal" style="margin-top:20px"><a class="btn" href="#gallery" data-gallery="rooms">See all room photos &rsaquo;</a></div>
   </div>
 </section>
 
@@ -764,6 +757,7 @@ nav.main a.active{opacity:1;color:var(--accent)}
   fb.forEach(function(f){f.addEventListener('click',function(){setFilter(f.dataset.filter)})});
   moreBtn.addEventListener('click',function(){limit+=PAGE;apply()});
   [].slice.call(document.querySelectorAll('[data-gallery]')).forEach(function(a){a.addEventListener('click',function(){setFilter(a.dataset.gallery)})});
+  [].slice.call(document.querySelectorAll('[data-open]')).forEach(function(b){b.addEventListener('click',function(){setFilter('rooms');var t=all.filter(function(x){return x.dataset.full===b.dataset.open})[0];if(t)open(items.indexOf(t))})});
   apply();
 
 
