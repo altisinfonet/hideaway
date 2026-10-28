@@ -30,10 +30,10 @@ hideaway/
 ├── README.md        Project overview
 └── jhargram/        Standalone Jhargram page (publish at /jhargram/)
     ├── index.html   Page markup, styles and scripts (no build step)
-    └── images/      Optimised photos used by the page
+    └── images/      Optimised photos (rooms/, balconies/, exterior/, grounds/, renders/, plus thumbs/)
 ```
 
-To preview the Jhargram page, open `jhargram/index.html` in a browser. To add a photo to its gallery, put the image in `jhargram/images/` and add another `<button data-full="images/NAME.jpg"><img src="images/NAME.jpg" alt="..."></button>` inside `#gallery-grid`.
+To preview the Jhargram page, open `jhargram/index.html` in a browser. To add a photo to its gallery, save a ~1600px JPEG and a ~700px thumbnail (in a `thumbs/` folder next to it) and add `<button data-cat="rooms" data-full="images/rooms/NAME.jpg"><img src="images/rooms/thumbs/NAME.jpg" alt="..."></button>` inside `#gallery-grid`. `data-cat` is one of `rooms`, `balconies`, `exterior`, `grounds`, `dining`, `drinks` or `renders`.
 
 ## Contributing
 
