@@ -120,6 +120,19 @@ section{padding:clamp(72px,10vw,140px) 0}
 .card h3{font-size:34px;margin-bottom:8px}
 .card p{margin:0;font-size:15px;opacity:.9;line-height:1.5}
 
+
+/* rooms */
+.rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.room{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 14px 40px rgba(21,61,75,.08);display:flex;flex-direction:column}
+.room .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,#5b3d20,#153d4b)}
+.room .ph::after{content:attr(data-label);position:absolute;inset:0;display:grid;place-items:center;font:400 28px/1 var(--serif);color:rgba(255,255,255,.7)}
+.room .ph img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.room:hover .ph img{transform:scale(1.05)}
+.room .body{padding:24px 26px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
+.room h3{font-size:30px}
+.room p{margin:0;color:var(--ink-soft);font-size:16px;line-height:1.55}
+.room .btn{align-self:flex-start;margin-top:auto}
+
 /* gallery */
 .masonry{columns:3;column-gap:20px}
 .masonry button{display:block;width:100%;margin:0 0 20px;padding:0;border:0;border-radius:var(--radius);overflow:hidden;cursor:zoom-in;background:var(--ink);break-inside:avoid}
@@ -152,7 +165,7 @@ footer.site a{text-decoration:none;opacity:.75}footer.site a:hover{opacity:1;col
 /* reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.card img,.masonry img{transition:none}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.card img,.masonry img,.room .ph img{transition:none}}
 
 /* responsive */
 @media (max-width:1020px){
@@ -163,7 +176,7 @@ footer.site a{text-decoration:none;opacity:.75}footer.site a:hover{opacity:1;col
   nav.main a{display:block;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
   .bar-cta .tel{display:none}
   .hl-grid{grid-template-columns:repeat(3,1fr)}
-  .cards{grid-template-columns:1fr 1fr}
+  .cards,.rooms-grid{grid-template-columns:1fr 1fr}
   .masonry{columns:2}
 }
 @media (max-width:760px){
@@ -171,7 +184,7 @@ footer.site a{text-decoration:none;opacity:.75}footer.site a:hover{opacity:1;col
   .intro,.sec-head,.visit .grid{grid-template-columns:1fr}
   .intro figure{order:-1}
   .hl-grid{grid-template-columns:repeat(2,1fr)}
-  .cards{grid-template-columns:1fr}
+  .cards,.rooms-grid{grid-template-columns:1fr}
   .card{aspect-ratio:4/5}
   .masonry{columns:1}
   .info{grid-template-columns:1fr}
@@ -190,7 +203,7 @@ footer.site a{text-decoration:none;opacity:.75}footer.site a:hover{opacity:1;col
       <ul>
         <li><a href="https://stayhideaway.in/home/">Home</a></li>
         <li><a href="https://stayhideaway.in/about-us/">About</a></li>
-        <li><a href="https://stayhideaway.in/rooms/">Rooms</a></li>
+        <li><a href="#rooms">Rooms</a></li>
         <li><a href="https://stayhideaway.in/our-location/" aria-current="page">Locations</a></li>
         <li><a href="https://stayhideaway.in/amenities/">Amenities</a></li>
         <li><a href="https://stayhideaway.in/contact/">Contact</a></li>
@@ -271,11 +284,50 @@ footer.site a{text-decoration:none;opacity:.75}footer.site a:hover{opacity:1;col
   </div>
 </section>
 
+<section id="rooms">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow"><b>03</b><span>Rooms</span></div>
+        <h2>Rest where the day slows down</h2>
+      </div>
+      <p>Comfortable rooms in the same earthy spirit as the rest of Hideaway Jhargram. Ask our team about availability and the best direct rate.</p>
+    </div>
+    <div class="rooms-grid">
+<!-- TODO: replace titles/descriptions with the real Jhargram room types and add images/room-1.jpg, room-2.jpg, room-3.jpg -->
+      <article class="room reveal">
+        <div class="ph" data-label="Room One"><img src="images/room-1.jpg" alt="Room One at Hideaway Jhargram" width="1600" height="1200" loading="lazy" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Room One</h3>
+          <p>Details for this room type to be added.</p>
+          <a class="btn" href="mailto:sales@stayhideaway.in?subject=Hideaway%20Jhargram%20-%20Room%20One">Enquire &rsaquo;</a>
+        </div>
+      </article>
+      <article class="room reveal">
+        <div class="ph" data-label="Room Two"><img src="images/room-2.jpg" alt="Room Two at Hideaway Jhargram" width="1600" height="1200" loading="lazy" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Room Two</h3>
+          <p>Details for this room type to be added.</p>
+          <a class="btn" href="mailto:sales@stayhideaway.in?subject=Hideaway%20Jhargram%20-%20Room%20Two">Enquire &rsaquo;</a>
+        </div>
+      </article>
+      <article class="room reveal">
+        <div class="ph" data-label="Room Three"><img src="images/room-3.jpg" alt="Room Three at Hideaway Jhargram" width="1600" height="1200" loading="lazy" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Room Three</h3>
+          <p>Details for this room type to be added.</p>
+          <a class="btn" href="mailto:sales@stayhideaway.in?subject=Hideaway%20Jhargram%20-%20Room%20Three">Enquire &rsaquo;</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section id="gallery">
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
-        <div class="eyebrow"><b>03</b><span>Gallery</span></div>
+        <div class="eyebrow"><b>04</b><span>Gallery</span></div>
         <h2>A look inside</h2>
       </div>
       <p>Tap any photo to view it full size.</p>
@@ -294,7 +346,7 @@ footer.site a{text-decoration:none;opacity:.75}footer.site a:hover{opacity:1;col
   <div class="wrap">
     <div class="grid">
       <div class="reveal">
-        <div class="eyebrow"><b>04</b><span>Plan your visit</span></div>
+        <div class="eyebrow"><b>05</b><span>Plan your visit</span></div>
         <h2>Come and spend an afternoon with us</h2>
         <p>For reservations, group bookings or questions about Hideaway Jhargram, call or write to our team. Mention code <strong>HIDEAWAY</strong> when you book direct.</p>
         <a class="btn solid" href="tel:+919477822222">Call +91-9477822222</a>
