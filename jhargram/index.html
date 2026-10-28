@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Hideaway Dulungbari | Resort &amp; Restaurant in Jhargram, West Bengal</title>
 <meta name="description" content="Hideaway Dulungbari: terracotta brick, hand-woven rattan lamps, tribal wall art and patterned tile floors, set against open garden views in Jhargram, West Bengal.">
 <link rel="canonical" href="https://stayhideaway.in/jhargram/">
@@ -183,6 +184,10 @@ section{padding:clamp(72px,10vw,140px) 0}
 .video button:hover::before{background:rgba(12,40,50,.15)}
 .video .play{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
 .video .play::after{content:"";margin-left:6px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent #2b1a08}
+.video .vfallback{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#fff;background:center/cover no-repeat}
+.video .vfallback::before{content:"";position:absolute;inset:0;background:rgba(12,40,50,.6)}
+.video .vfallback div{position:relative;padding:24px}
+.aerial .video .vfallback p{margin:0 0 18px;font-size:18px;color:#fff}
 .more{display:flex;justify-content:center;margin-top:12px}
 .note{margin:-12px 0 28px;color:var(--ink-soft);font-size:15px}
 nav.main a.active{opacity:1;color:var(--accent)}
@@ -770,7 +775,7 @@ nav.main a.active{opacity:1;color:var(--accent)}
     var o=location.protocol.indexOf('http')===0?'&origin='+encodeURIComponent(location.origin):'';
     hf=document.createElement('iframe');
     hf.src='https://www.youtube-nocookie.com/embed/CSYVhQSCyUw?autoplay=1&mute=1&loop=1&playlist=CSYVhQSCyUw&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1'+o;
-    hf.allow='autoplay; encrypted-media';hf.tabIndex=-1;hf.title='Background drone video';
+    hf.allow='autoplay; encrypted-media';hf.referrerPolicy='strict-origin-when-cross-origin';hf.tabIndex=-1;hf.title='Background drone video';
     hf.addEventListener('load',function(){hf.contentWindow.postMessage(JSON.stringify({event:'listening',id:1}),'*')});
     hv.appendChild(hf);
   }
@@ -789,14 +794,27 @@ nav.main a.active{opacity:1;color:var(--accent)}
     new IntersectionObserver(function(es){es.forEach(function(e){if(!hf)return;if(!e.isIntersecting){if(playing())cmd('pauseVideo')}else if(!userPaused&&!playing()&&state!==-1){cmd('playVideo')}})},{threshold:.1}).observe(document.querySelector('.hero'));
   }
   var calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!calm&&!conn.saveData&&!/(^|slow-)2g/.test(conn.effectiveType||'')){
+  if(location.protocol!=='file:'&&!calm&&!conn.saveData&&!/(^|slow-)2g/.test(conn.effectiveType||'')){
     var go=function(){setTimeout(startHero,300)};
     if(document.readyState==='complete')go();else window.addEventListener('load',go);
   }
 
-  var vid=document.getElementById('video');
+  var vid=document.getElementById('video'),YT='https://www.youtube.com/watch?v=CSYVhQSCyUw';
+  function vidFallback(){
+    var poster=vid.querySelector('button')?vid.querySelector('button').style.backgroundImage:'url(images/drone-poster.webp)';
+    vid.innerHTML='<div class="vfallback" style="background-image:'+poster+'"><div><p>This video can\u2019t be played inside the page.</p><a class="btn light" href="'+YT+'" target="_blank" rel="noopener">Watch on YouTube &rsaquo;</a></div></div>';
+  }
   vid.querySelector('button').addEventListener('click',function(){
-    vid.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/CSYVhQSCyUw?autoplay=1&rel=0" title="Hideaway Dulungbari drone tour" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+    if(location.protocol==='file:'){window.open(YT,'_blank','noopener');return}
+    var f=document.createElement('iframe'),o=location.protocol.indexOf('http')===0?'&origin='+encodeURIComponent(location.origin):'';
+    f.src='https://www.youtube-nocookie.com/embed/CSYVhQSCyUw?autoplay=1&rel=0&enablejsapi=1'+o;
+    f.title='Hideaway Dulungbari drone tour';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';
+    vid.innerHTML='';vid.appendChild(f);
+    f.addEventListener('load',function(){f.contentWindow.postMessage(JSON.stringify({event:'listening',id:2}),'*')});
+    window.addEventListener('message',function h(e){
+      if(e.source!==f.contentWindow)return;var d;try{d=JSON.parse(e.data)}catch(x){return}
+      if(d.event==='onError'){window.removeEventListener('message',h);vidFallback()}
+    });
   });
 
   var links=[].slice.call(document.querySelectorAll('nav.main a[href^="#"]')),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
