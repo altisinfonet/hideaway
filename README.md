@@ -32,12 +32,12 @@ hideaway/
     ├── index.html   Page markup, styles and scripts (no build step)
     ├── assets/      Ortica Linear font, logo mark and favicon copied from the main site
     ├── .htaccess    Optional Apache caching/security headers
-    └── images/      Optimised photos (rooms/, balconies/, exterior/, grounds/, renders/, plus thumbs/)
+    └── images/      WebP photos (rooms/, balconies/, exterior/, grounds/, renders/, plus thumbs/); og-image.jpg is the one JPEG, kept for social-sharing previews
 ```
 
 The Jhargram page lives outside WordPress and mirrors the main site's design tokens: Ortica Linear (headings, weight 300, -1px tracking) and Jost (body), ink `#153d4b`, background `#f2f2ec`, accent `#e49951`, 12px/600 uppercase pill buttons, 75px side gutters at 1440px. Keep those in sync if the main site's theme changes.
 
-To preview it, serve the repo root over HTTP (for example `python3 -m http.server`) and open `/jhargram/`; opening the file directly works but blocks the web font. To add a photo to its gallery, save a ~1600px JPEG and a ~700px thumbnail (in a `thumbs/` folder next to it) and add `<button data-cat="rooms" data-full="images/rooms/NAME.jpg"><img src="images/rooms/thumbs/NAME.jpg" alt="..."></button>` inside `#gallery-grid`. `data-cat` is one of `rooms`, `balconies`, `exterior`, `grounds`, `dining`, `drinks` or `renders`.
+To preview it, serve the repo root over HTTP (for example `python3 -m http.server`) and open `/jhargram/`; opening the file directly works but blocks the web font. To add a photo to its gallery, save a ~1600px WebP (quality ~76) and a ~700px thumbnail (in a `thumbs/` folder next to it) and add `<button data-cat="rooms" data-full="images/rooms/NAME.webp"><img src="images/rooms/thumbs/NAME.webp" alt="..."></button>` inside `#gallery-grid`. `data-cat` is one of `rooms`, `balconies`, `exterior`, `grounds`, `dining`, `drinks` or `renders`.
 
 ## Contributing
 
