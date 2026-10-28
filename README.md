@@ -30,7 +30,7 @@ hideaway/
 ├── README.md        Project overview
 └── jhargram/        Standalone Jhargram page (publish at /jhargram/)
     ├── index.html   Page markup, styles and scripts (no build step)
-    ├── assets/      Ortica Linear font, logo mark and favicon copied from the main site
+    ├── assets/      Ortica Linear and Jost fonts, logo mark and favicon (fonts are self-hosted; no Google Fonts request)
     ├── .htaccess    Optional Apache caching/security headers
     └── images/      WebP photos (rooms/, balconies/, exterior/, grounds/, renders/, plus thumbs/); og-image.jpg is the one JPEG, kept for social-sharing previews
 ```

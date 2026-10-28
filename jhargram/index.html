@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -18,9 +18,7 @@
 
 <link rel="icon" href="assets/favicon.jpg">
 <link rel="preload" href="assets/OrticaLinear-Light.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300..600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/Jost-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <script type="application/ld+json">
 {
@@ -43,6 +41,7 @@
 
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 <style>
+@font-face{font-family:Jost;src:url(assets/Jost-latin.woff2) format("woff2");font-weight:300 600;font-style:normal;font-display:swap;unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:"Ortica Linear";src:url(assets/OrticaLinear-Light.woff2) format("woff2");font-weight:300;font-style:normal;font-display:swap}
 :root{
   --bg:#f2f2ec;
@@ -77,12 +76,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:300;line-height:1.05;letter-spacin
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* header (two rows at the top like the main site; compact single row once scrolled) */
-header.site{position:fixed;inset:0 0 auto 0;z-index:50;color:#fff;transition:background .3s,box-shadow .3s}
-header.site.scrolled{background:rgba(21,61,75,.97);box-shadow:0 2px 20px rgba(0,0,0,.18)}
+header.site{position:fixed;inset:0 0 auto 0;z-index:50;color:#fff;background:linear-gradient(180deg,rgba(12,40,50,.6),rgba(12,40,50,.15));transition:transform .35s,background .3s,box-shadow .3s}
+header.site.scrolled{background:var(--ink);box-shadow:0 2px 20px rgba(0,0,0,.18);transform:translateY(calc(var(--row1,0px) * -1))}
+header.site.scrolled nav.main{border-top-color:transparent}
 header.site .inner{display:grid;grid-template-columns:1fr auto;grid-template-areas:"logo cta" "nav nav";align-items:center;padding:0 clamp(15px,2.1vw,30px) 0 clamp(15px,3.1vw,45px);max-width:var(--max);margin:0 auto}
 .logo{grid-area:logo;display:inline-flex;flex-direction:column;align-items:center;gap:3px;padding:12px 0;width:max-content;text-decoration:none}
 .logo img{height:40px;width:auto}
-.logo span{font:300 11px/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;padding-left:.34em;opacity:.9}
+.logo span{font:300 12px/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;padding-left:.34em;opacity:.9}
 .hcta{grid-area:cta;display:flex;align-items:center;gap:22px}
 .hcta .tel{display:inline-flex;align-items:center;gap:12px;font-size:20px;font-weight:300;text-decoration:none;padding-right:22px;border-right:1px solid rgba(255,255,255,.2)}
 .hcta .tel svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;opacity:.55}
@@ -97,15 +97,6 @@ nav.main a:hover,nav.main a.active{opacity:1;color:var(--accent)}
 .burger[aria-expanded=true] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
 .burger[aria-expanded=true] span:nth-child(2){opacity:0}
 .burger[aria-expanded=true] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-@media (min-width:1021px){
-  header.site.scrolled .inner{grid-template-columns:auto 1fr auto;grid-template-areas:"logo nav cta"}
-  header.site.scrolled nav.main{border:0;margin:0;padding:0}
-  header.site.scrolled nav.main a{padding:8px 0}
-  header.site.scrolled .logo{padding:6px 0}
-  header.site.scrolled .logo img{height:40px}
-  header.site.scrolled .logo span{display:none}
-  header.site.scrolled .hcta .tel{display:none}
-}
 
 /* hero */
 .hero{position:relative;min-height:min(100svh,900px);display:grid;align-items:center;text-align:center;color:#fff;background:#0c2832 url(images/drone-poster.webp) center/cover no-repeat}
@@ -253,10 +244,19 @@ nav.main a.active{opacity:1;color:var(--accent)}
 .wa-close:hover{background:var(--bg-alt)}
 .totop{right:92px}
 
+/* a11y + polish */
+.skip{position:fixed;left:12px;top:-60px;z-index:200;padding:12px 20px;background:var(--accent);color:#2b1a08;border-radius:30px;font:600 13px/1 var(--sans);text-decoration:none;transition:top .2s}
+.skip:focus{top:12px}
+a[href^="tel:"]{white-space:nowrap}
+.hcta .tel{padding-block:4px}
+.fbar a{display:inline-block;padding:5px 0}
+.foot .fcols a{padding:2px 0}
+nav.main li.only-m{display:none}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.hero-video{display:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.card img,.jrow img{transition:none}.video button::before{transition:none}.totop{transition:none}.wa-pop,.wa-btn{transition:none}}
+@media (prefers-reduced-motion:reduce){.hero-video{display:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.card img,.jrow img{transition:none}.video button::before{transition:none}.totop{transition:none}.wa-pop,.wa-btn,.skip,header.site{transition:none}}
 
 /* type scale shared with the main site */
 .intro h2,.sec-head h2,.visit h2{font-size:clamp(40px,5.14vw,74px);line-height:1.05;letter-spacing:-1px}
@@ -282,6 +282,7 @@ nav.main a.active{opacity:1;color:var(--accent)}
   nav.main li+li::before{display:none}
   nav.main a{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.12)}
   .hero .wrap{padding-top:170px}
+  nav.main li.only-m{display:block}
   .fgrid{grid-template-columns:1fr}
   .hl-grid{grid-template-columns:repeat(3,1fr)}
   .cards,.amen-grid{grid-template-columns:1fr 1fr}
@@ -305,6 +306,7 @@ nav.main a.active{opacity:1;color:var(--accent)}
 </head>
 <body>
 
+<a class="skip" href="#about">Skip to content</a>
 <header class="site" id="top">
   <div class="inner">
     <a class="logo" href="#top" aria-label="Hideaway Jhargram, back to top">
@@ -318,13 +320,14 @@ nav.main a.active{opacity:1;color:var(--accent)}
         <li><a href="#location">Location</a></li>
         <li><a href="#amenities">Amenities</a></li>
         <li><a href="#visit">Contact</a></li>
+        <li class="only-m"><a href="tel:+919477822222">Call +91&#8209;9477822222</a></li>
       </ul>
     </nav>
     <div class="hcta">
       <a class="tel" href="tel:+919477822222"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>+91-9477822222</a>
       <a class="btn light" href="#visit">Book now &rsaquo;</a>
     </div>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -702,7 +705,7 @@ nav.main a.active{opacity:1;color:var(--accent)}
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <a class="logo" href="#top" aria-label="Back to top"><img src="assets/logo-mark.png" alt="" width="166" height="64"><span>Jhargram</span></a>
+        <a class="logo" href="#top" aria-label="Jhargram, back to top"><img src="assets/logo-mark.png" alt="" width="166" height="64"><span>Jhargram</span></a>
         <p class="tag">Unplug. Unwind. Rediscover yourself only at Hideaway.</p>
       </div>
       <div>
@@ -732,8 +735,10 @@ nav.main a.active{opacity:1;color:var(--accent)}
     </div>
   </div>
 </footer>
-<a class="totop" id="totop" href="#top" aria-label="Back to top">&uarr;</a>
 
+
+<aside class="floaters" aria-label="Quick actions">
+<a class="totop" id="totop" href="#top" aria-label="Back to top">&uarr;</a>
 <a class="wa-btn" id="wa-btn" href="https://wa.me/919830362222?text=Hello%2C%20I%20have%20a%20question%20about%20Hideaway%20Dulungbari%20%28Jhargram%29." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
   <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C9.4 3 4 8.4 4 15.03c0 2.13.56 4.2 1.62 6.03L4 29l8.13-1.6a12 12 0 0 0 5.9 1.5h.01C24.68 28.9 30 23.5 30 16.9 30 10.4 24.7 3 16.04 3zm0 22.3c-1.8 0-3.56-.48-5.1-1.4l-.37-.22-4.83.95.99-4.7-.24-.38a9.9 9.9 0 0 1-1.52-5.2c0-5.5 4.5-9.97 10.07-9.97 5.4 0 9.87 4.45 9.87 9.95 0 5.5-4.5 10.97-9.87 10.97zm5.5-7.4c-.3-.15-1.78-.88-2.05-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.95 1.18-.17.2-.35.23-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.64-.93-2.25-.25-.58-.5-.5-.68-.5h-.58c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.1 3.2 5.1 4.5.7.3 1.27.5 1.7.62.72.23 1.37.2 1.88.12.58-.08 1.78-.73 2.03-1.43.25-.7.25-1.3.18-1.43-.08-.12-.28-.2-.58-.35z"/></svg>
 </a>
@@ -743,20 +748,25 @@ nav.main a.active{opacity:1;color:var(--accent)}
   <p>Message our team on WhatsApp and we&rsquo;ll be happy to help.</p>
   <a class="btn" href="https://wa.me/919830362222?text=Hello%2C%20I%20have%20a%20question%20about%20Hideaway%20Dulungbari%20%28Jhargram%29." target="_blank" rel="noopener">Chat on WhatsApp</a>
 </div>
+</aside>
 
 <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
-  <button class="lb-btn lb-close" aria-label="Close">&times;</button>
-  <button class="lb-btn lb-prev" aria-label="Previous">&#8249;</button>
-  <img id="lb-img" alt="">
-  <button class="lb-btn lb-next" aria-label="Next">&#8250;</button>
+  <button type="button" class="lb-btn lb-close" aria-label="Close">&times;</button>
+  <button type="button" class="lb-btn lb-prev" aria-label="Previous">&#8249;</button>
+  <img id="lb-img" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+  <button type="button" class="lb-btn lb-next" aria-label="Next">&#8250;</button>
 </div>
 
 <script>
 (function(){
   var header=document.querySelector('header.site'),burger=document.getElementById('burger'),nav=document.getElementById('nav');
-  var totop=document.getElementById('totop');function onScroll(){header.classList.toggle('scrolled',window.scrollY>40);totop.classList.toggle('show',window.scrollY>600)}
+  var totop=document.getElementById('totop');
+  function setRow1(){var m=window.matchMedia('(max-width:1020px)').matches;header.style.setProperty('--row1',(m?document.querySelector('.hcta').offsetHeight:nav.offsetTop)+'px')}
+  setRow1();window.addEventListener('resize',setRow1);window.addEventListener('load',setRow1);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(setRow1);
+  function onScroll(){header.classList.toggle('scrolled',window.scrollY>40);totop.classList.toggle('show',window.scrollY>600)}
   onScroll();window.addEventListener('scroll',onScroll,{passive:true});
   burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');burger.setAttribute('aria-expanded',false);burger.focus()}});
   nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');burger.setAttribute('aria-expanded',false)}});
 
   var els=document.querySelectorAll('.reveal');
@@ -895,6 +905,7 @@ nav.main a.active{opacity:1;color:var(--accent)}
   document.addEventListener('keydown',function(e){
     if(!lb.classList.contains('open'))return;
     if(e.key==='Escape')close();else if(e.key==='ArrowLeft')show(i-1);else if(e.key==='ArrowRight')show(i+1);
+    else if(e.key==='Tab'){var f=[].slice.call(lb.querySelectorAll('button')),k=f.indexOf(document.activeElement);e.preventDefault();f[(k+(e.shiftKey?-1:1)+f.length)%f.length].focus()}
   });
 })();
 </script>
